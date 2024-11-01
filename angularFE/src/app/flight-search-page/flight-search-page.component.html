@@ -1,0 +1,62 @@
+<div class="p-8">
+	<h1 class="text-2xl font-bold mb-4">Search for Flights</h1>
+	<form (ngSubmit)="searchFlights()"
+		class="space-y-4">
+		<div class="flex space-x-4">
+			<input [(ngModel)]="departureCity"
+				type="text"
+				placeholder="Departure City"
+				name="departureCity"
+				class="p-2 border rounded w-full"
+				required>
+			<input [(ngModel)]="arrivalCity"
+				type="text"
+				placeholder="Arrival City"
+				name="arrivalCity"
+				class="p-2 border rounded w-full"
+				required>
+		</div>
+		<div class="flex space-x-4">
+			<input [(ngModel)]="travelDate"
+				type="date"
+				name="travelDate"
+				class="p-2 border rounded w-full"
+				required>
+			<input [(ngModel)]="passengers"
+				type="number"
+				min="1"
+				placeholder="Passengers"
+				name="passengers"
+				class="p-2 border rounded w-full"
+				required>
+		</div>
+		<button type="submit"
+			class="bg-blue-500 text-white p-2 rounded mt-4">
+			Search Flights
+		</button>
+	</form>
+
+
+	<div *ngIf="flights?.length"
+		class="mt-8">
+		<h2 class="text-xl font-semibold">Available Flights</h2>
+		<ul>
+			<li *ngFor="let flight of flights"
+				class="border rounded p-4 mt-4">
+				<p>
+					Flight Number: {{ flight.flightNumber }}
+				</p>
+				<p>
+					Departure: {{ flight.departureTime }}
+				</p>
+				<p>
+					Arrival: {{ flight.arrivalTime }}
+				</p>
+				<button (click)="selectFlight(flight)"
+					class="bg-green-500 text-white p-2 rounded">
+					Book
+				</button>
+			</li>
+		</ul>
+	</div>
+</div>

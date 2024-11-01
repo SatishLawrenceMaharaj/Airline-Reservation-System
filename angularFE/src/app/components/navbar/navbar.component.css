@@ -1,0 +1,15 @@
+/* navbar.component.css */
+nav {
+  background-color: white;
+}
+
+#mobile-menu {
+  display: none;
+}
+
+/* Show mobile menu on smaller screens */
+@media (max-width: 768px) {
+  #mobile-menu {
+    display: block;
+  }
+}
