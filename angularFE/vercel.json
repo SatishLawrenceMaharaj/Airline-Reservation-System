@@ -1,7 +1,14 @@
 {
+  "version": 2,
+  "builds": [
+    {
+      "src": "angularFE/package.json",
+      "use": "@vercel/static-build"
+    }
+  ],
   "routes": [
     {
-      "src": "/home",
+      "src": "/(.*)",
       "dest": "/"
     }
   ]
