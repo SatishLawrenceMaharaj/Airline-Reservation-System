@@ -1,1 +1,17 @@
-<p>my-trips-page works!</p>
+<div class="p-8">
+  <h1 class="text-2xl font-bold mb-4">My Trips</h1>
+
+  <!-- Display trips if available -->
+  <div *ngIf="trips?.length" class="mt-8">
+    <h2 class="text-xl font-semibold">Trips</h2>
+    <ul>
+      <li *ngFor="let trip of trips" class="border rounded p-4 mt-4">
+        <p>Flight Number: {{ trip.flightNumber }}</p>
+        <p>Date: {{ trip.date }}</p>
+        <button (click)="viewTripDetails(trip)" class="bg-green-500 text-white p-2 rounded">
+          View Details
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

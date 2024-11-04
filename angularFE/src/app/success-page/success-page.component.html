@@ -1,1 +1,53 @@
-<p>success-page works!</p>
+<div class="flex p-8 h-screen overflow-auto">
+	<!-- Column 1: Timeline of Bookings -->
+	<div class="w-1/5 border-r pr-4">
+		<div class="mb-6 flex items-center justify-between">
+			<h2 class="text-2xl font-semibold text-[#DA1984]">Booking History</h2>
+			<button (click)="sortBookings()"
+				class="inline-flex items-center px-2 py-1 rounded-md bg-[#813F98] text-white text-xs hover:bg-white hover:text-[#813F98] hover:outline hover:outline-2 hover:outline-[#813F98] transition transform hover:scale-100">
+				Sort by Date: {{ sortOrder === 'asc' ? 'Ascending' : 'Descending' }}
+			</button>
+		</div>
+		<ul id="bookingTimeline"
+			class="space-y-2">
+			<li *ngFor="let booking of bookings"
+				(click)="selectBooking(booking)"
+				class="cursor-pointer hover:bg-[#DA1984] hover:text-white p-2 rounded">
+				<span class="text-lg font-medium">
+					Flight: {{ booking.flight }}
+				</span>
+				<br>
+				<span class="text-sm">
+					Date: {{ booking.date }}
+				</span>
+			</li>
+		</ul>
+	</div>
+	<!-- Column 2: Booking Details -->
+	<div class="w-4/5 pl-4">
+    <h1 class="text-3xl font-bold text-[#DA1984] mb-4">Booking Details</h1>
+    <div id="bookingDetails" class="text-center">
+      <div *ngIf="selectedBooking;">
+        <div class="flex items-center justify-center mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="text-[#DA1984] w-36 h-36 hover:text-[#813F98]">
+            <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/>
+          </svg>
+        </div>
+        <p class="text-lg font-semibold text-[#813F98] mb-2">Booking Successful</p>
+        <p>
+          <strong>Flight:</strong>
+          {{ selectedBooking.flight }}
+        </p>
+        <p>
+          <strong>Seat:</strong>
+          {{ selectedBooking.seat }}
+        </p>
+        <p>
+          <strong>Details:</strong>
+          {{ selectedBooking.details }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>

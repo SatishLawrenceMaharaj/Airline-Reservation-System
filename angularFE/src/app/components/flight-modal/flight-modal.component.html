@@ -1,0 +1,111 @@
+<!-- Flight Details Modal -->
+<div *ngIf="selectedFlight"
+	class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+	<div [ngClass]="{'slide-out': slideOut, 'slide-in': !slideOut}"
+		class="bg-white rounded-lg p-6 shadow-lg w-full max-w-lg relative h-[80vh] mx-4 md:mx-0">
+		<button (click)="closeModal()"
+			class="absolute top-4 right-6 text-gray-500 hover:text-gray-800">
+			&times;
+		</button>
+
+
+		<h2 class="text-2xl font-bold mb-4 text-center">Flight Details</h2>
+
+
+		<div class="grid grid-cols-2 gap-4">
+			<div class="border p-4 rounded-lg shadow">
+				<p class="font-semibold">Flight Number:</p>
+				<p>
+					{{ selectedFlight.flightNumber }}
+				</p>
+			</div>
+			<div class="border p-4 rounded-lg shadow">
+				<p class="font-semibold">Departure:</p>
+				<p>
+					{{ selectedFlight.origin }}
+				</p>
+			</div>
+			<div class="border p-4 rounded-lg shadow">
+				<p class="font-semibold">Destination:</p>
+				<p>
+					{{ selectedFlight.destination }}
+				</p>
+			</div>
+			<div class="border p-4 rounded-lg shadow">
+				<p class="font-semibold">Departure Time:</p>
+				<p>
+					{{ selectedFlight.departureTime }}
+				</p>
+			</div>
+			<div class="border p-4 rounded-lg shadow">
+				<p class="font-semibold">Arrival Time:</p>
+				<p>
+					{{ selectedFlight.arrivalTime }}
+				</p>
+			</div>
+			<div class="border p-4 rounded-lg shadow">
+				<p class="font-semibold">Duration:</p>
+				<p>
+					{{ selectedFlight.duration }}
+				</p>
+			</div>
+			<div class="border p-4 rounded-lg shadow">
+				<p class="font-semibold">Price:</p>
+				<p class="text-green-600 font-semibold">
+					${{ selectedFlight.price }}
+				</p>
+			</div>
+			<div class="border p-4 rounded-lg shadow">
+				<p class="font-semibold">Total Capacity:</p>
+				<p>
+					{{ selectedFlight.totalCapacity }}
+				</p>
+			</div>
+			<div class="border p-4 rounded-lg shadow">
+				<p class="font-semibold">Booked Seats:</p>
+				<p>
+					{{ selectedFlight.bookedSeats }}
+				</p>
+			</div>
+		</div>
+		<button (click)="bookFlight(selectedFlight)"
+			class="mt-4 inline-block px-4 py-2 rounded-lg bg-[#DA1984] text-white hover:bg-white hover:text-[#DA1984] hover:outline hover:outline-2 hover:outline-[#DA1984] transition transform hover:scale-100">
+			Book
+		</button>
+	</div>
+</div>
+
+
+<!-- Seat Selection Modal -->
+<div *ngIf="showSeatModal"
+	class="fixed inset-0 flex items-center justify-end z-50">
+	<div class="bg-white rounded-lg p-6 shadow-lg relative h-[80vh] w-[50vw] mx-4 md:mx-36 border-2 border-[#DA1984] overflow-y-auto">
+		<button (click)="closeSeatModal()"
+			class="absolute top-4 right-6 text-gray-500 hover:text-gray-800">
+			&times;
+		</button>
+		<h2 class="text-2xl font-bold mb-4 text-center">Pick Your Seat</h2>
+		<!-- Seats Grid -->
+        <div class="grid grid-cols-6 gap-4">
+            <div *ngFor="let seat of seatMap" (click)="selectSeat(seat)"
+                [ngClass]="{
+                    'bg-[#DA1984] text-white': seat.available && seat.selected,
+                    'bg-gray-300 text-gray-500': !seat.available,
+                    'bg-gray-200': seat.available && !seat.selected
+                }"
+                class="p-4 text-center rounded-lg cursor-pointer">
+                {{ seat.number }}
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <p class="font-semibold">Selected Seat:</p>
+            <p>{{ selectedSeat ? selectedSeat.number : 'None' }}</p>
+        </div>
+
+        <button (click)="confirmSeat()" [disabled]="!selectedSeat"
+            class="mt-4 inline-block px-4 py-2 rounded-lg bg-[#DA1984] text-white hover:bg-white hover:text-[#DA1984] hover:outline hover:outline-2 hover:outline-[#DA1984] transition transform hover:scale-100">
+            Confirm Seat
+        </button>
+	</div>
+</div>

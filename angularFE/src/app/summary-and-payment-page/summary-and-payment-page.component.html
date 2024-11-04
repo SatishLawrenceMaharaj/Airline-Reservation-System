@@ -1,1 +1,43 @@
-<p>summary-and-payment-page works!</p>
+<div class="flex p-8 h-screen overflow-auto">
+  <!-- Left Column: Payment List -->
+  <div class="w-1/5 border-r pr-4 space-y-4">
+    <h2 class="text-lg font-semibold bg-red-500 text-white p-2 rounded">Unpaid</h2>
+    <div *ngFor="let payment of unpaidPayments" class="space-y-2">
+      <div class="bg-red-100 p-3 rounded cursor-pointer" (click)="selectedFlight = payment">
+        <p class="font-bold">Flight Number: {{ payment.flightNumber }}</p>
+        <p>Departure: {{ payment.departureTime }}</p>
+        <p>Arrival: {{ payment.arrivalTime }}</p>
+        <p class="font-semibold">Price: ${{ payment.price }}</p>
+      </div>
+    </div>
+
+    <h2 class="text-lg font-semibold bg-green-500 text-white p-2 rounded mt-6">Paid</h2>
+    <div *ngFor="let payment of paidPayments" class="space-y-2" (click)="selectPaidFlight()">
+      <div class="bg-gray-200 p-3 rounded cursor-pointer">
+        <p class="font-bold">Flight Number: {{ payment.flightNumber }}</p>
+        <p>Departure: {{ payment.departureTime }}</p>
+        <p>Arrival: {{ payment.arrivalTime }}</p>
+        <p class="font-semibold">Price: ${{ payment.price }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column: Booking Summary & Payment -->
+  <div class="w-4/5 p-8 pl-4">
+    <h1 class="text-3xl font-bold mb-4 text-[#DA1984]">Booking Summary & Payment</h1>
+    <div class="bg-gray-100 p-4 rounded mb-6">
+      <p><strong>Flight Number:</strong> {{ selectedFlight?.flightNumber }}</p>
+      <p><strong>Departure:</strong> {{ selectedFlight?.departureTime }}</p>
+      <p><strong>Arrival:</strong> {{ selectedFlight?.arrivalTime }}</p>
+      <p><strong>Total Price:</strong> ${{ selectedFlight?.price }}</p>
+    </div>
+    <form (ngSubmit)="makePayment()" class="space-y-4">
+      <div class="space-y-2">
+        <input [(ngModel)]="cardNumber" type="text" placeholder="Card Number" name="cardNumber" class="p-2 border rounded w-full" required>
+        <input [(ngModel)]="expDate" type="text" placeholder="Expiration Date" name="expDate" class="p-2 border rounded w-full" required>
+        <input [(ngModel)]="cvv" type="text" placeholder="CVV" name="cvv" class="p-2 border rounded w-full" required>
+      </div>
+      <button type="submit" class="mt-4 inline-block px-4 py-2 rounded-lg bg-[#DA1984] text-white hover:bg-white hover:text-[#DA1984] hover:outline hover:outline-2 hover:outline-[#DA1984] transition">Complete Booking</button>
+    </form>
+  </div>
+</div>

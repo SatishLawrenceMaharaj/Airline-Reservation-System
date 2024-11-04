@@ -1,1 +1,35 @@
-<p>passenger-information-page works!</p>
+<div class="p-8 max-w-[60vw] mx-auto bg-white mt-6 rounded-lg shadow-lg">
+  <h1 class="text-3xl font-bold mb-6 text-center text-gray-800 flex items-center justify-center">
+    <span>Passenger Information</span>
+    <button type="button" (click)="enableEditing()" class="ml-2 focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor" class="w-6 h-6 text-[#DA1984] hover:text-[#813F98] transition-all duration-200">
+        <path d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-96c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7-14.3 32-32 32L96 448c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 64z"/>
+      </svg>
+    </button>
+  </h1>
+  <form (ngSubmit)="submitPassengerInfo()" #passengerForm="ngForm" class="space-y-6">
+    <div class="space-y-4">
+      <div>
+        <input type="text" placeholder="Name" [(ngModel)]="name" name="name" class="p-3 border border-gray-300 rounded-lg w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#DA1984]" required [disabled]="!isEditing" />
+        <div *ngIf="passengerForm.controls['name']?.invalid && (passengerForm.controls['name']?.touched || passengerForm.submitted)" class="text-red-500 text-sm">Name is required.</div>
+      </div>
+      <div>
+        <input type="date" [(ngModel)]="dob" name="dob" class="p-3 border border-gray-300 rounded-lg w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#DA1984]" required [disabled]="!isEditing" />
+        <div *ngIf="passengerForm.controls['dob']?.invalid && (passengerForm.controls['dob']?.touched || passengerForm.submitted)" class="text-red-500 text-sm">Date of birth is required.</div>
+      </div>
+      <div>
+        <input type="text" placeholder="Gender" [(ngModel)]="gender" name="gender" class="p-3 border border-gray-300 rounded-lg w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#DA1984]" required [disabled]="!isEditing" />
+        <div *ngIf="passengerForm.controls['gender']?.invalid && (passengerForm.controls['gender']?.touched || passengerForm.submitted)" class="text-red-500 text-sm">Gender is required.</div>
+      </div>
+      <div>
+        <input type="email" placeholder="Email" [(ngModel)]="email" name="email" class="p-3 border border-gray-300 rounded-lg w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#DA1984]" required [disabled]="!isEditing" />
+        <div *ngIf="passengerForm.controls['email']?.invalid && (passengerForm.controls['email']?.touched || passengerForm.submitted)" class="text-red-500 text-sm">Valid email is required.</div>
+      </div>
+      <div>
+        <input type="tel" placeholder="Phone" [(ngModel)]="phone" name="phone" class="p-3 border border-gray-300 rounded-lg w-full shadow-sm focus:outline-none focus:ring-2 focus:ring-[#DA1984]" required [disabled]="!isEditing" pattern="^[0-9]{10}$" />
+        <div *ngIf="passengerForm.controls['phone']?.invalid && (passengerForm.controls['phone']?.touched || passengerForm.submitted)" class="text-red-500 text-sm">Phone number must be 10 digits.</div>
+      </div>
+    </div>
+    <button type="submit" class="mt-6 w-full inline-block px-6 py-3 rounded-lg bg-[#DA1984] text-white font-semibold shadow-md hover:bg-white hover:text-[#DA1984] hover:outline hover:outline-2 hover:outline-[#DA1984] transition-all duration-200 transform hover:scale-100" [disabled]="!isEditing || passengerForm.invalid">Update Passenger</button>
+  </form>
+</div>
