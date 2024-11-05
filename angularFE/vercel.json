@@ -3,13 +3,14 @@
   "builds": [
     {
       "src": "angularFE/package.json",
+      "use": "@vercel/node",
       "config": { "distDir": "dist/angular-fe" }
     }
   ],
   "routes": [
     {
-      "src": "/home",
-      "dest": "/home"
+      "src": "/(.*)",
+      "dest": "/$1"
     }
   ]
 }
