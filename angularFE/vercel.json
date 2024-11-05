@@ -1,5 +1,12 @@
 {
-
+  "version": 2,
+  "builds": [
+    {
+      "src": "angularFE/package.json",
+      "use": "@vercel/angular",
+      "config": { "distDir": "dist/angular-fe" }
+    }
+  ],
   "routes": [
     {
       "src": "/home",
