@@ -3,7 +3,6 @@
   "builds": [
     {
       "src": "angularFE/package.json",
-      "use": "@vercel/angular",
       "config": { "distDir": "dist/angular-fe" }
     }
   ],
